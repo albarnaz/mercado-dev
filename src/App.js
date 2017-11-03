@@ -4,8 +4,22 @@ import HeaderHome from './components/HeaderHome';
 import AnuncioHome from './components/AnuncioHome';
 import Footer from './components/Footer';
 import Categoria from './components/Categoria';
+import base from './configs/base';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      categorias: []
+    };
+
+    base.bindToState('categorias', {
+      context: this,
+      state: 'categorias'
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -19,7 +33,11 @@ class App extends Component {
           </div>
           <h3>Categorias</h3>
           <div className="row">
-            <Categoria attrs={{ categoria: 'Carro', icon: 'fa-car' }} />
+            {
+              this.state.categorias.map((categoria, index) => {
+                  return <Categoria key={index} attrs={categoria} />
+              })
+            }
           </div>
         </div>
         <Footer />
