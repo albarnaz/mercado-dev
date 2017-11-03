@@ -11,12 +11,21 @@ class App extends Component {
     super(props);
 
     this.state = {
-      categorias: []
+      categorias: [],
+      anuncios: []
     };
 
     base.bindToState('categorias', {
       context: this,
       state: 'categorias'
+    });
+
+    base.bindToState('anuncios', {
+      context: this,
+      state: 'anuncios',
+      queries: {
+        limitToLast: 3
+      }
     });
   }
 
@@ -27,9 +36,11 @@ class App extends Component {
         <div className="container">
           <h3>Últimos Anúncios</h3>
           <div className="row">
-            <AnuncioHome />
-            <AnuncioHome />
-            <AnuncioHome />
+            {
+              this.state.anuncios.map((anuncio, index) => {
+                  return <AnuncioHome key={index} attrs={anuncio} />
+              })
+            }
           </div>
           <h3>Categorias</h3>
           <div className="row">
