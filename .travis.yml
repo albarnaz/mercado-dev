@@ -8,7 +8,6 @@ cache:
 
 before_install:
   - npm install -g firebase-tools
-  - cd functions
 
 script:
   - npm test
