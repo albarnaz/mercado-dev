@@ -33,9 +33,9 @@ class Home extends Component {
     return (
       <div>
         <HeaderHome />
-        <div className="container">
+        <div className='container'>
           <h3>Últimos Anúncios</h3>
-          <div className="row">
+          <div className='row'>
             {
               this.state.anuncios.map((anuncio, index) => {
                   return <AnuncioHome key={index} attrs={anuncio} />
@@ -43,7 +43,7 @@ class Home extends Component {
             }
           </div>
           <h3>Categorias</h3>
-          <div className="row">
+          <div className='row'>
             {
               this.state.categorias.map((categoria, index) => {
                   return <Categoria key={index} attrs={categoria} />
