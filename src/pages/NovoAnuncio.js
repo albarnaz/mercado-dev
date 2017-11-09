@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Footer from './../components/Footer';
 import HeaderInterno from './../components/HeaderInterno';
@@ -8,6 +9,7 @@ class NovoAnuncio extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { success: false };
     this.enviarAnuncio = this.enviarAnuncio.bind(this);
   }
 
@@ -27,13 +29,14 @@ class NovoAnuncio extends Component {
           descricao: this.descricao.value,
           preco: this.preco.value,
           telefone: this.telefone.value,
-          vendedor: this.vendedor.value
+          vendedor: this.vendedor.value,
+          categoria: this.categoria.value
         };
 
         base.push('anuncios', {
           data: anuncio
-        }, (error) => {
-          console.log(error);
+        }).then(() => {
+          this.setState({ success: true });
         });
       });
   }
@@ -41,6 +44,7 @@ class NovoAnuncio extends Component {
   render() {
     return (
       <div>
+        { this.state.success && <Redirect to='/' />}
         <HeaderInterno />
         <div className='container' style={{ paddingTop: '120px' }}>
           <h3>Novo Anúncio</h3>
@@ -52,6 +56,14 @@ class NovoAnuncio extends Component {
             <div className='form-group'>
               <label>Nome</label>
               <input type='text' className='form-control' placeholder='Nome' ref={ (ref) => this.nome = ref } />
+            </div>
+            <div className='form-group'>
+              <label>Categoria</label>
+              <select className='form-control' ref={ (ref) => this.categoria = ref }>
+                {
+                  this.props.categorias.map((item, index) => <option key={index} value={item.url}>{item.categoria}</option>)
+                }
+              </select>
             </div>
             <div className='form-group'>
               <label>Descrição</label>

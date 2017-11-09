@@ -11,14 +11,14 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      categorias: [],
+      //categorias: [],
       anuncios: []
     };
 
-    base.bindToState('categorias', {
-      context: this,
-      state: 'categorias'
-    });
+    // base.bindToState('categorias', {
+    //   context: this,
+    //   state: 'categorias'
+    // });
 
     base.bindToState('anuncios', {
       context: this,
@@ -46,7 +46,7 @@ class Home extends Component {
           <h3>Categorias</h3>
           <div className='row'>
             {
-              this.state.categorias.map((categoria, index) => {
+              this.props.categorias.map((categoria, index) => {
                   return <Categoria key={index} attrs={categoria} />
               })
             }
